@@ -1,8 +1,8 @@
 import './Auth.css';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../services/firebase';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+import { auth, googleProvider } from '../services/firebase';
 import { ShieldAlert } from 'lucide-react';
 
 export default function Auth({ mode = 'signin' }) {
@@ -11,6 +11,20 @@ export default function Auth({ mode = 'signin' }) {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+
+  const handleGoogleSignIn = async () => {
+    setError('');
+    setLoading(true);
+    try {
+      await signInWithPopup(auth, googleProvider);
+      navigate('/dashboard');
+    } catch (err) {
+      console.error("Google Auth Error:", err);
+      setError(err.message || 'An error occurred during Google authentication.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,6 +45,7 @@ export default function Auth({ mode = 'signin' }) {
         navigate('/dashboard');
       }
     } catch (err) {
+      console.error("Auth Error:", err);
       setError(err.message || 'An error occurred during authentication.');
     } finally {
       setLoading(false);
@@ -55,7 +70,7 @@ export default function Auth({ mode = 'signin' }) {
             </div>
           )}
 
-          <button className="btn btn-secondary" type="button" style={{ width: '100%', marginBottom: '1.5rem' }}>
+          <button className="btn btn-secondary" type="button" onClick={handleGoogleSignIn} disabled={loading} style={{ width: '100%', marginBottom: '1.5rem' }}>
             Continue with Google
           </button>
 
