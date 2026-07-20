@@ -1,12 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { Bot, Send, Shield, Moon, Sun, Loader } from 'lucide-react';
 import './Helpline.css';
 
 export default function Helpline() {
   const [messages, setMessages] = useState([
-    { sender: 'ai', text: "Hello. I am your SecureShe AI Assistant. I can provide safety guidelines, emergency protocols, or emotional support. How can I help you today?" }
+    { sender: 'ai', text: "Hello. I am your SafeHer AI Assistant. I can provide safety guidelines, emergency protocols, or emotional support. How can I help you today?" }
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [theme, setTheme] = useState('dark');
   const messagesEndRef = useRef(null);
 
   const scrollToBottom = () => {
@@ -16,6 +18,10 @@ export default function Helpline() {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'dark' ? 'light' : 'dark');
+  };
 
   const handleSend = async (e) => {
     e.preventDefault();
@@ -27,18 +33,17 @@ export default function Helpline() {
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost:5005/api/helpline', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/helpline`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: userMessage })
       });
       const data = await response.json();
       
-      // Simulate typing delay for realistic feel
       setTimeout(() => {
         setMessages(prev => [...prev, { sender: 'ai', text: data.reply }]);
         setIsLoading(false);
-      }, 800);
+      }, 500);
     } catch (error) {
       setMessages(prev => [...prev, { sender: 'ai', text: "Error connecting to AI. Please try again." }]);
       setIsLoading(false);
@@ -46,39 +51,68 @@ export default function Helpline() {
   };
 
   return (
-    <div className="helpline-container">
-      <div className="chat-window">
-        <div className="chat-header">
-          <h2>🛡️ AI Safety Assistant</h2>
-          <p>Confidential & 24/7 Support</p>
-        </div>
+    <div className={`helpline-fullscreen-container ${theme}`}>
+      <div className="chat-layout">
         
-        <div className="chat-messages">
-          {messages.map((msg, index) => (
-            <div key={index} className={`message-bubble ${msg.sender}`}>
-              {msg.text}
+        {/* Sidebar / Info Panel */}
+        <div className="chat-sidebar">
+          <div className="sidebar-header">
+            <Bot size={40} color="var(--clr-primary)" />
+            <h2>SafeHer AI</h2>
+            <p>Your 24/7 Safety Companion</p>
+          </div>
+          
+          <div className="sidebar-features">
+            <div className="feature-item">
+              <Shield size={20} color="var(--clr-success)" />
+              <div>
+                <strong>Confidential</strong>
+                <p>All chats are private and secure.</p>
+              </div>
             </div>
-          ))}
-          {isLoading && (
-            <div className="message-bubble ai typing-indicator">
-              <span></span><span></span><span></span>
-            </div>
-          )}
-          <div ref={messagesEndRef} />
+          </div>
+          
+          <div style={{ marginTop: 'auto', display: 'flex', justifyContent: 'center' }}>
+             <button className="btn btn-ghost" onClick={toggleTheme} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                {theme === 'dark' ? <><Sun size={18} /> Light Mode</> : <><Moon size={18} /> Dark Mode</>}
+             </button>
+          </div>
         </div>
 
-        <form className="chat-input-area" onSubmit={handleSend}>
-          <input 
-            type="text" 
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Type your question or concern here..."
-            disabled={isLoading}
-          />
-          <button type="submit" disabled={isLoading || !input.trim()}>
-            Send
-          </button>
-        </form>
+        {/* Main Chat Area */}
+        <div className="chat-main">
+          <div className="chat-messages-area">
+            {messages.map((msg, index) => (
+              <div key={index} className={`chat-message ${msg.sender === 'ai' ? 'bot-message' : 'user-message'}`}>
+                {msg.sender === 'ai' && <div className="message-avatar"><Bot size={20} /></div>}
+                <div className="message-content">{msg.text}</div>
+              </div>
+            ))}
+            {isLoading && (
+              <div className="chat-message bot-message loading">
+                <div className="message-avatar"><Bot size={20} /></div>
+                <div className="message-content" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <Loader size={16} className="spin" /> Thinking...
+                </div>
+              </div>
+            )}
+            <div ref={messagesEndRef} />
+          </div>
+
+          <form className="chat-input-area" onSubmit={handleSend}>
+            <input 
+              type="text" 
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Ask anything..."
+              disabled={isLoading}
+            />
+            <button type="submit" disabled={isLoading || !input.trim()}>
+              <Send size={20} />
+            </button>
+          </form>
+        </div>
+
       </div>
     </div>
   );

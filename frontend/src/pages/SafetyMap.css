@@ -1,8 +1,5 @@
 .safety-map-container {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 2rem;
-  color: #f8fafc;
+  padding: 2rem 0;
 }
 
 .safety-header {
@@ -16,34 +13,7 @@
   -webkit-text-fill-color: transparent;
 }
 
-.map-card {
-  background: rgba(30, 41, 59, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  padding: 2rem;
-  margin-bottom: 3rem;
-  backdrop-filter: blur(10px);
-}
 
-.map-placeholder {
-  background: rgba(15, 23, 42, 0.8);
-  border-radius: 12px;
-  padding: 4rem 2rem;
-  text-align: center;
-  border: 2px dashed rgba(255, 255, 255, 0.2);
-  margin-bottom: 2rem;
-}
-
-.map-icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-}
-
-.api-note {
-  font-size: 0.8rem;
-  color: #ef4444;
-  margin-top: 1rem;
-}
 
 .map-legend {
   display: flex;
@@ -83,16 +53,16 @@
 }
 
 .procedure-card, .tip-card {
-  background: rgba(30, 41, 59, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 16px;
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-lg);
   padding: 1.5rem;
   transition: transform 0.2s ease;
 }
 
 .procedure-card:hover, .tip-card:hover {
   transform: translateY(-5px);
-  background: rgba(30, 41, 59, 0.8);
+  border-color: var(--clr-primary-light);
 }
 
 .step-num {
@@ -109,7 +79,7 @@
 }
 
 .procedure-card h4, .tip-card h3 {
-  color: #ff9999;
+  color: var(--clr-primary-light);
   margin-bottom: 0.8rem;
 }
 

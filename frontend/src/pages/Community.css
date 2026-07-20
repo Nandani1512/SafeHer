@@ -1,274 +1,58 @@
 /* ========================================
-   SecureShe — Community Page Styles
+   SecureShe — Community Page Minimal Styles
    ======================================== */
 
-.community-hero {
-  text-align: center;
-  margin-bottom: var(--sp-8);
-}
-
-.community-hero h1 {
-  font-size: var(--fs-2xl);
-  margin-bottom: var(--sp-3);
-}
-
-.community-hero p {
-  color: var(--clr-text-secondary);
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-/* College Selector */
-.college-selector {
-  background: var(--clr-surface);
+.contact-card-minimal {
+  background: var(--clr-surface-light);
   border: 1px solid var(--clr-border);
-  border-radius: var(--radius-xl);
-  padding: var(--sp-6);
-  margin-bottom: var(--sp-8);
+  border-radius: var(--radius-md);
+  padding: 1rem;
   display: flex;
   align-items: center;
-  gap: var(--sp-4);
-  flex-wrap: wrap;
+  gap: 1rem;
+  transition: all 0.2s ease;
 }
 
-.college-selector h2 {
-  font-size: var(--fs-lg);
-  display: flex;
-  align-items: center;
-  gap: var(--sp-2);
-}
-
-/* Outreach Section */
-.outreach-section {
-  margin-bottom: var(--sp-8);
-}
-
-.outreach-section h2 {
-  font-size: var(--fs-xl);
-  margin-bottom: var(--sp-5);
-  display: flex;
-  align-items: center;
-  gap: var(--sp-2);
-}
-
-.contact-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: var(--sp-4);
-}
-
-.contact-card {
-  background: var(--clr-surface);
-  border: 1px solid var(--clr-border);
-  border-radius: var(--radius-lg);
-  padding: var(--sp-5);
-  transition: all var(--tr-fast);
-}
-
-.contact-card:hover {
-  border-color: var(--clr-border-strong);
+.contact-card-minimal:hover {
+  border-color: var(--clr-primary-light);
   transform: translateY(-2px);
 }
 
-.contact-card h4 {
-  font-size: var(--fs-base);
-  margin-bottom: var(--sp-1);
+.contact-card-minimal strong {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--clr-text);
 }
 
-.contact-card .role {
-  color: var(--clr-primary-light);
-  font-size: var(--fs-sm);
-  font-weight: 500;
-  margin-bottom: var(--sp-3);
-}
-
-.contact-card .email {
+.contact-card-minimal span {
+  font-size: 0.85rem;
   color: var(--clr-text-secondary);
-  font-size: var(--fs-sm);
-  display: flex;
-  align-items: center;
-  gap: var(--sp-2);
 }
 
-/* Events Section */
-.events-section {
-  margin-bottom: var(--sp-8);
-}
-
-.events-section h2 {
-  font-size: var(--fs-xl);
-  margin-bottom: var(--sp-5);
-}
-
-.events-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: var(--sp-4);
-}
-
-.event-card {
-  background: var(--clr-surface);
-  border: 1px solid var(--clr-border);
-  border-radius: var(--radius-lg);
-  padding: var(--sp-5);
-  transition: all var(--tr-fast);
-  display: flex;
-  gap: var(--sp-4);
-}
-
-.event-card:hover {
-  border-color: var(--clr-border-strong);
-  box-shadow: var(--shadow-sm);
-}
-
-.event-card-date {
-  min-width: 60px;
-  text-align: center;
-  padding: var(--sp-3);
-  background: rgba(124, 58, 237, 0.1);
-  border-radius: var(--radius-md);
-  align-self: flex-start;
-}
-
-.event-card-date .day {
-  font-size: var(--fs-2xl);
-  font-weight: 800;
-  color: var(--clr-primary-light);
-  line-height: 1;
-}
-
-.event-card-date .month {
-  font-size: var(--fs-xs);
-  color: var(--clr-text-muted);
-  text-transform: uppercase;
-  font-weight: 600;
-}
-
-.event-card-info h4 {
-  font-size: var(--fs-base);
-  margin-bottom: var(--sp-2);
-}
-
-.event-card-info p {
-  color: var(--clr-text-secondary);
-  font-size: var(--fs-sm);
-  line-height: 1.5;
-}
-
-.event-card-info .event-meta {
-  margin-top: var(--sp-2);
-  color: var(--clr-text-muted);
-  font-size: var(--fs-xs);
-  display: flex;
-  gap: var(--sp-3);
-}
-
-/* FAQs Accordion */
-.faq-section h2 {
-  font-size: var(--fs-xl);
-  margin-bottom: var(--sp-5);
-}
-
-.faq-item {
-  background: var(--clr-surface);
-  border: 1px solid var(--clr-border);
-  border-radius: var(--radius-md);
-  margin-bottom: var(--sp-3);
-  overflow: hidden;
-}
-
-.faq-question {
-  padding: var(--sp-4) var(--sp-5);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.faq-item-minimal {
+  background: transparent;
+  border-bottom: 1px solid var(--clr-border);
   cursor: pointer;
-  font-weight: 600;
-  font-size: var(--fs-sm);
-  transition: background var(--tr-fast);
-  min-height: 52px;
-  background: none;
-  border: none;
-  width: 100%;
-  color: var(--clr-text);
-  text-align: left;
 }
 
-.faq-question:hover {
-  background: var(--clr-surface-light);
-}
-
-.faq-question .chevron {
-  transition: transform var(--tr-base);
-  font-size: var(--fs-sm);
-  color: var(--clr-text-muted);
-}
-
-.faq-item.open .faq-question .chevron {
-  transform: rotate(180deg);
-}
-
-.faq-answer {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height var(--tr-slow), padding var(--tr-slow);
-}
-
-.faq-item.open .faq-answer {
-  max-height: 500px;
-  padding: 0 var(--sp-5) var(--sp-4);
-}
-
-.faq-answer p {
-  color: var(--clr-text-secondary);
-  font-size: var(--fs-sm);
-  line-height: 1.7;
-}
-
-/* Community Feed */
-.community-feed {
-  margin-top: var(--sp-8);
-}
-
-.community-feed h2 {
-  font-size: var(--fs-xl);
-  margin-bottom: var(--sp-5);
-}
-
-.community-post-input {
+.faq-q {
+  padding: 1rem 0;
   display: flex;
-  gap: var(--sp-3);
-  margin-bottom: var(--sp-6);
-  background: var(--clr-surface);
-  border: 1px solid var(--clr-border);
-  border-radius: var(--radius-lg);
-  padding: var(--sp-4);
-}
-
-.community-post-input input {
-  flex: 1;
-  background: var(--clr-surface-light);
-  border: 1px solid var(--clr-border);
-  border-radius: var(--radius-full);
-  padding: var(--sp-3) var(--sp-4);
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 500;
+  font-size: 0.95rem;
   color: var(--clr-text);
-  font-size: var(--fs-sm);
+  transition: color 0.2s ease;
 }
 
-.community-post-input input:focus {
-  outline: none;
-  border-color: var(--clr-primary);
+.faq-q:hover {
+  color: var(--clr-primary-light);
 }
 
-@media (max-width: 768px) {
-  .contact-grid,
-  .events-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .college-selector {
-    flex-direction: column;
-    align-items: stretch;
-    text-align: center;
-  }
+.faq-a {
+  padding: 0 0 1rem 0;
+  font-size: 0.9rem;
+  color: var(--clr-text-secondary);
+  line-height: 1.6;
 }

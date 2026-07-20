@@ -9,6 +9,7 @@ import Forum from './pages/Forum';
 import Community from './pages/Community';
 import Profile from './pages/Profile';
 import HelplineDirectory from './pages/HelplineDirectory';
+import ChatbotWidget from './components/ChatbotWidget';
 import './App.css';
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
           </Routes>
         </main>
+        <ChatbotWidget />
       </div>
     </Router>
   );

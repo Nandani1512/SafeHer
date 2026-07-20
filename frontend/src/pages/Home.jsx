@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { io } from 'socket.io-client';
 import { Link } from 'react-router-dom';
+import { Phone, Map, Bot, Shield, AlertTriangle } from 'lucide-react';
 import SOSButton from '../components/SOSButton';
 import './Home.css';
 
-const socket = io('http://localhost:5005');
+const socket = io(import.meta.env.VITE_API_URL);
 
 export default function Home() {
   const [serverStatus, setServerStatus] = useState('Connecting to secure server...');
 
   useEffect(() => {
-    fetch('http://localhost:5005/api/status')
+    fetch(`${import.meta.env.VITE_API_URL}/api/status`)
       .then(res => res.json())
       .then(data => setServerStatus(data.message))
       .catch(err => setServerStatus('Backend server offline'));
@@ -20,25 +21,16 @@ export default function Home() {
 
   return (
     <div className="home-container">
-      {/* Emergency Banner */}
-      <div className="emergency-banner" style={{position: 'relative', zIndex: 1}}>
-        Server Status: {serverStatus}
-      </div>
-
       <main>
         {/* Hero Section */}
         <section className="hero" id="hero">
-          <div className="hero-float">🛡️</div>
-          <div className="hero-float">💜</div>
-          <div className="hero-float">⭐</div>
-          <div className="hero-float">🌸</div>
+          <div className="hero-float" style={{ opacity: 0.1 }}><Shield size={64} /></div>
+          <div className="hero-float" style={{ opacity: 0.1 }}><AlertTriangle size={64} /></div>
+          <div className="hero-float" style={{ opacity: 0.1 }}><Phone size={64} /></div>
+          <div className="hero-float" style={{ opacity: 0.1 }}><Map size={64} /></div>
 
           <div className="container">
             <div className="hero-content">
-              <div className="hero-badge">
-                <span>🏫</span>
-                ByteVerse Mavericks — Campus Safety Platform
-              </div>
 
               <h1>
                 Your Safety Is Our
@@ -65,8 +57,8 @@ export default function Home() {
                   <Link to="/map" className="btn btn-primary btn-lg">
                     Explore Safety Map
                   </Link>
-                  <Link to="/helpline" className="btn btn-ghost btn-lg">
-                    🚨 Access AI Helpline
+                  <Link to="/helpline" className="btn btn-ghost btn-lg" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <Bot size={20} /> Access AI Helpline
                   </Link>
                 </div>
               </div>
@@ -108,21 +100,21 @@ export default function Home() {
 
             <div className="features-grid">
               <div className="feature-card">
-                <div className="feature-icon red">📞</div>
+                <div className="feature-icon red"><Phone size={32} /></div>
                 <h3>Helpline Directory</h3>
                 <p>Complete database of emergency helplines categorized by type. One-click calling.</p>
                 <Link to="/helpline" className="btn btn-ghost btn-sm">Access Helplines →</Link>
               </div>
 
               <div className="feature-card">
-                <div className="feature-icon green">🗺️</div>
+                <div className="feature-icon green"><Map size={32} /></div>
                 <h3>Safety Map</h3>
                 <p>Interactive maps showing safe zones, emergency exits, security checkpoints, and nearby hospitals.</p>
                 <Link to="/map" className="btn btn-ghost btn-sm">View Map →</Link>
               </div>
 
               <div className="feature-card">
-                <div className="feature-icon blue">🤖</div>
+                <div className="feature-icon blue"><Bot size={32} /></div>
                 <h3>AI ChatBot</h3>
                 <p>24/7 AI-powered support for common questions, crisis guidance, and resource retrieval.</p>
                 <Link to="/helpline" className="btn btn-ghost btn-sm">Chat Now →</Link>

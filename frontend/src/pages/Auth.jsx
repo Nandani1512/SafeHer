@@ -1,8 +1,9 @@
 import './Auth.css';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../services/firebase';
+import { ShieldAlert } from 'lucide-react';
 
 export default function Auth({ mode = 'signin' }) {
   const navigate = useNavigate();
@@ -26,8 +27,8 @@ export default function Auth({ mode = 'signin' }) {
         await signInWithEmailAndPassword(auth, email, password);
         navigate('/dashboard');
       } else {
-        // Implement signup if needed
-        setError('Sign up currently disabled in this demo.');
+        await createUserWithEmailAndPassword(auth, email, password);
+        navigate('/dashboard');
       }
     } catch (err) {
       setError(err.message || 'An error occurred during authentication.');
@@ -102,8 +103,8 @@ export default function Auth({ mode = 'signin' }) {
         </div>
 
         <div style={{ textAlign: 'center', marginTop: '1.5rem' }}>
-          <Link to="/helpline" style={{ color: 'var(--clr-text-secondary)', fontSize: 'var(--fs-sm)' }}>
-            🚨 Need emergency help? Access helplines without signing in →
+          <Link to="/helpline" style={{ color: 'var(--clr-text-secondary)', fontSize: 'var(--fs-sm)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
+            <ShieldAlert size={16} /> Need emergency help? Access helplines without signing in →
           </Link>
         </div>
       </div>

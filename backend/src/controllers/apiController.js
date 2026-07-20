@@ -1,16 +1,25 @@
-const handleHelplineMessage = (req, res) => {
+const { GoogleGenAI } = require('@google/genai');
+
+const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+
+const handleHelplineMessage = async (req, res) => {
   const { message } = req.body;
   
-  const lowerMsg = message?.toLowerCase() || '';
-  let reply = "I'm here to help. Please let me know what you need or dial 112 for immediate emergency assistance.";
-  
-  if (lowerMsg.includes('police') || lowerMsg.includes('emergency')) {
-    reply = "If you are in immediate danger, please dial 112 (National Emergency) or 1091 (Women Helpline) immediately. Find a safe, well-lit area if possible.";
-  } else if (lowerMsg.includes('harassment') || lowerMsg.includes('stalk')) {
-    reply = "I'm sorry you are experiencing this. Harassment is illegal. Please document everything (screenshots, times, locations) and contact the cyber cell or local police. You can also press your SOS button to alert your contacts.";
+  if (!process.env.GEMINI_API_KEY || process.env.GEMINI_API_KEY === 'your_gemini_api_key_here') {
+    return res.json({ reply: "I'm currently in offline mode because the AI is not configured. Please dial 112 for immediate assistance." });
   }
 
-  res.json({ reply });
+  try {
+    const response = await ai.models.generateContent({
+      model: 'gemini-2.5-flash',
+      contents: `You are an AI safety assistant for a women's campus safety app named SecureShe. Be empathetic, concise, and helpful. If it sounds like a severe emergency, recommend calling 112. User message: ${message}`
+    });
+    
+    res.json({ reply: response.text });
+  } catch (error) {
+    console.error('AI Error:', error);
+    res.status(500).json({ reply: "I'm having trouble connecting right now. Please try again or call an emergency helpline." });
+  }
 };
 
 const getStatus = (req, res) => {

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { auth } from '../services/firebase';
 import { onAuthStateChanged } from 'firebase/auth';
+import { Shield } from 'lucide-react';
 
 export default function Navbar() {
   const location = useLocation();
@@ -26,8 +27,7 @@ export default function Navbar() {
       <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1.5rem' }}>
         
         <Link to="/" className="navbar-brand" aria-label="SecureShe Home" onClick={closeMenu}>
-          {/* We assume assets/logo.png is available in public folder or imported, fallback to emoji if missing */}
-          <span style={{ fontSize: '1.5rem' }}>🌸</span>
+          <Shield size={24} style={{ color: 'var(--clr-primary)' }} />
           <span>SecureShe</span>
         </Link>
 

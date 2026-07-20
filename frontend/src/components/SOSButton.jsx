@@ -3,7 +3,7 @@ import { io } from 'socket.io-client';
 import './SOSButton.css';
 
 // Socket setup for real-time SOS broadcasting
-const socket = io('http://localhost:5005');
+const socket = io(import.meta.env.VITE_API_URL);
 
 export default function SOSButton() {
   const [isActive, setIsActive] = useState(false);
