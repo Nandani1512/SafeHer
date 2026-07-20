@@ -1,0 +1,88 @@
+.sos-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem 0;
+  font-family: 'Inter', sans-serif;
+}
+
+.sos-btn {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, var(--clr-accent), var(--clr-accent-dark));
+  border: none;
+  box-shadow: 0 10px 20px rgba(244, 114, 182, 0.4), 
+              inset 0 -5px 15px rgba(0, 0, 0, 0.2), 
+              inset 0 5px 15px rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.1s ease-in-out, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.sos-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 15px 30px rgba(244, 114, 182, 0.5), 
+              inset 0 -5px 15px rgba(0, 0, 0, 0.2), 
+              inset 0 5px 15px rgba(255, 255, 255, 0.4);
+}
+
+.sos-btn:active {
+  transform: scale(0.95);
+  box-shadow: 0 5px 10px rgba(244, 114, 182, 0.4);
+}
+
+.sos-text {
+  position: relative;
+  z-index: 2;
+  color: white;
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Active State & Animations */
+.sos-btn.active {
+  background: var(--clr-accent-dark);
+  animation: pulse-danger 1.5s infinite;
+}
+
+.sos-btn.active .sos-text {
+  font-size: 1.2rem;
+}
+
+@keyframes pulse-danger {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 30px rgba(255, 0, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 0, 0, 0);
+  }
+}
+
+.sos-status {
+  margin-top: 1.5rem;
+  color: #ff3333;
+  font-weight: 600;
+  animation: fade-in-up 0.4s ease-out forwards;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
