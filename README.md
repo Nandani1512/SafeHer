@@ -1,15 +1,16 @@
 # SafeHer 🛡️
 
-**SafeHer** is a comprehensive personal safety and community empowerment platform dedicated to providing real-time assistance, critical resources, and a supportive network for women. Designed with speed and reliability in mind, SafeHer offers a suite of tools ranging from real-time SOS broadcasting to interactive safety maps.
+**SafeHer** is a comprehensive personal safety and community empowerment platform dedicated to providing real-time assistance, critical resources, and a supportive network for women. Designed with speed and reliability in mind, SafeHer offers a suite of tools ranging from an AI-powered helpline to interactive safety maps, all wrapped in a premium, modern glassmorphic UI.
 
 ## 🌟 Key Features
 
 *   🚨 **Real-Time SOS Broadcasting:** Instantly alert contacts and broadcast your live geolocation during emergencies using WebSocket technology.
-*   🗺️ **Interactive Safety Map:** Navigate safely with real-time incident reports, safe zone indicators, and location sharing.
+*   🗺️ **Interactive Safety Map:** Navigate safely with real-time OpenStreetMap integration via Leaflet, featuring safe zone indicators and location sharing.
+*   🤖 **AI Chatbot Assistant:** Get instant, empathetic safety advice and routing through an intelligent chatbot powered by Google's Gemini AI.
 *   📞 **Helpline Directory:** Direct and immediate access to critical emergency services, domestic abuse hotlines, and counseling services.
-*   💬 **Community Forum:** A secure and supportive space for users to share experiences, ask for advice, and connect with others.
-*   🔐 **User Authentication:** Secure sign-up and login powered by Firebase Authentication.
-*   📊 **Personal Dashboard:** Manage your emergency contacts, view your trusted network, and customize your safety preferences.
+*   💬 **Community Forum:** A secure and supportive space (backed by MongoDB) for users to share experiences, ask for advice, and connect with others.
+*   🔐 **User Authentication:** Secure sign-up, login, and Google OAuth powered by Firebase Authentication.
+*   📊 **Premium Bento-Box Dashboard:** Manage your emergency contacts and view your trusted network through a state-of-the-art glassmorphic UI.
 
 ## 🛠️ Technology Stack
 
@@ -18,23 +19,31 @@
 *   [Vite](https://vitejs.dev/) - Frontend Tooling
 *   [React Router](https://reactrouter.com/) - Navigation
 *   [Firebase](https://firebase.google.com/) - Authentication
-*   [Socket.io-client](https://socket.io/) - Real-time communication
+*   [Leaflet / React-Leaflet](https://react-leaflet.js.org/) - Interactive Maps
+*   [Vanilla CSS] - Custom Glassmorphic Styling
 
 **Backend**
 *   [Node.js](https://nodejs.org/) & [Express 5](https://expressjs.com/) - Server Framework
-*   [Socket.io](https://socket.io/) - WebSockets for real-time SOS alerts
-*   [MongoDB](https://www.mongodb.com/) & [Mongoose](https://mongoosejs.com/) - Database and ODM
+*   [Google Gemini API](https://aistudio.google.com/) - AI Chatbot Engine
+*   [MongoDB Atlas](https://www.mongodb.com/) & [Mongoose](https://mongoosejs.com/) - Cloud Database and ODM
 
-## 🚀 Getting Started
+## 🚀 Live Deployment
+
+This project is configured for cloud deployment:
+- **Frontend**: Hosted on [Vercel](https://vercel.com/) (using `vercel.json` for SPA routing)
+- **Backend**: Hosted on [Render](https://render.com/) as a Web Service
+- **Database**: Hosted on [MongoDB Atlas](https://www.mongodb.com/products/platform/atlas-database)
+
+## 💻 Local Development Setup
 
 Follow these instructions to get a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Prerequisites
 
 *   Node.js (v18 or higher)
-*   npm or yarn
 *   MongoDB instance (local or Atlas)
 *   Firebase Project (for Authentication)
+*   Google Gemini API Key
 
 ### 1. Clone the repository
 
@@ -46,56 +55,44 @@ cd SafeHer
 ### 2. Backend Setup
 
 ```bash
-# Navigate to the backend directory
 cd backend
-
-# Install dependencies
 npm install
-
-# Create a .env file and add your environment variables
-cp .env.example .env
-
-# Start the development server (runs on port 5005 by default)
-npm run dev
 ```
 
-*Ensure your `.env` file contains your MongoDB connection string and any other required backend secrets.*
+Create a `.env` file in the `backend` directory:
+```env
+PORT=5005
+MONGODB_URI=your_mongodb_connection_string
+GEMINI_API_KEY=your_gemini_api_key
+```
+
+Start the development server:
+```bash
+npm run dev
+```
 
 ### 3. Frontend Setup
 
 ```bash
-# Open a new terminal and navigate to the frontend directory
-cd frontend
-
-# Install dependencies
+cd ../frontend
 npm install
+```
 
-# Start the Vite development server
+Create a `.env` file in the `frontend` directory:
+```env
+VITE_FIREBASE_API_KEY=your_api_key
+VITE_FIREBASE_AUTH_DOMAIN=your_auth_domain
+VITE_FIREBASE_PROJECT_ID=your_project_id
+VITE_FIREBASE_STORAGE_BUCKET=your_storage_bucket
+VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+VITE_FIREBASE_APP_ID=your_app_id
+VITE_FIREBASE_MEASUREMENT_ID=your_measurement_id
+VITE_API_URL=http://localhost:5005
+```
+
+Start the Vite development server:
+```bash
 npm run dev
-```
-
-*Ensure your Firebase configuration is properly set up in `frontend/src/services/firebase.js`.*
-
-## 📂 Project Structure
-
-```
-SafeHer/
-├── backend/
-│   ├── src/
-│   │   ├── controllers/   # Route controllers
-│   │   ├── routes/        # Express API routes
-│   │   └── services/      # Business logic & Socket service
-│   ├── server.js          # Express server entry point
-│   └── package.json
-└── frontend/
-    ├── src/
-    │   ├── assets/        # Images, icons, etc.
-    │   ├── components/    # Reusable UI components (Navbar, SOSButton, etc.)
-    │   ├── pages/         # Route views (Home, Dashboard, Map, etc.)
-    │   ├── services/      # Firebase and API services
-    │   ├── App.jsx        # Main React component
-    │   └── main.jsx       # React DOM entry point
-    └── package.json
 ```
 
 ## 🤝 Contributing
